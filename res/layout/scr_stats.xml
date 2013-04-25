@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+
+	<TextView
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:text="Неделя: xx,
+		День: хх,
+		Отжиманий: хх"
+		android:id="@+id/tv_header"
+		/>
+
+	<TextView
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:text="timer"
+		android:id="@+id/tv_timer"
+		/>
+
+	<TextView
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:text="done: xx"
+		android:id="@+id/tv_done"
+		/>
+
+	<TextView
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:text="remaining: xx"
+		android:id="@+id/tv_remaining"
+		/>
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+
+		<Button
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Start"
+			android:id="@+id/btn_start"
+			android:layout_weight="50"/>
+
+		<Button
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Cancel"
+			android:id="@+id/btn_cancel"
+			android:layout_weight="50"/>
+	</LinearLayout>
+</LinearLayout>
+

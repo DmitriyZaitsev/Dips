@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="Сколько раз отжимаешься?"
+		android:id="@+id/textView"
+		android:layout_centerHorizontal="true"
+		android:layout_alignParentTop="true"/>
+
+	<EditText
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:id="@+id/et_initial_dips"
+		android:layout_centerHorizontal="true"
+		android:layout_below="@+id/textView"
+		android:phoneNumber="false"
+		android:numeric="integer"
+		android:layout_alignLeft="@+id/textView"
+		android:layout_alignRight="@+id/textView"/>
+
+	<Button
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="OK"
+		android:id="@+id/btn_ok"
+		android:layout_centerHorizontal="true"
+		android:layout_below="@+id/et_initial_dips"
+		android:layout_alignRight="@+id/textView"
+		android:layout_alignLeft="@+id/textView"/>
+</RelativeLayout>
