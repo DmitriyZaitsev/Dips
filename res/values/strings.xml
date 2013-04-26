@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="app_name">Dips</string>
-	<string name="sorry_pal">Прости, дружище, но ты слишком крут</string>
+	<string name="sorry_pal">Прости, дружище, но ты слишком крут. Иди выебывайся в свой
+		двор!
+	</string>
 </resources>

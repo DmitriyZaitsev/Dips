@@ -8,7 +8,7 @@ import android.widget.Button;
 import com.dzaitsev.dips.R;
 
 public class MainActivity extends Activity {
-	private int CODE_REQUEST = 1;
+	private final int CODE_REQUEST = 1;
 
 	/** Called when the activity is first created. */
 	@Override public void onCreate(Bundle savedInstanceState) {

@@ -9,16 +9,16 @@ import android.content.SharedPreferences;
  * Created by Dmitriy Zaitsev at 2013-04-25, 16:13.<br>
  */
 public final class DipsPreferences {
+	private final String DIPS_PREFERENCES = "DipsPreferences";
+	private final String KEY_USERNAME = "username";
+	private final String KEY_INITIAL_DIPS = "initial_dips";
+	private final String KEY_ALREADY_REGISTERED = "already_registered";
+	private final String KEY_USERS_LEVEL = "users_level";
 	private SharedPreferences sharedPreferences;
 	private SharedPreferences.Editor preferencesEditor;
-	private String DIPS_PREFERENCES = "DipsPreferences";
-	private String KEY_USERNAME = "username";
-	private String KEY_INITIAL_DIPS = "initial_dips";
-	private String KEY_ALREADY_REGISTERED = "already_registered";
 
 	public DipsPreferences(Context context) {
-		sharedPreferences = context.getSharedPreferences(DIPS_PREFERENCES,
-				Context.MODE_PRIVATE);
+		sharedPreferences = context.getSharedPreferences(DIPS_PREFERENCES, Context.MODE_PRIVATE);
 		preferencesEditor = sharedPreferences.edit();
 	}
 
@@ -46,6 +46,15 @@ public final class DipsPreferences {
 
 	public void setAlreadyRegistered(boolean registered) {
 		preferencesEditor.putBoolean(KEY_ALREADY_REGISTERED, registered);
+		preferencesEditor.commit();
+	}
+
+	public int getUsersLevel() {
+		return sharedPreferences.getInt(KEY_USERS_LEVEL, 0);
+	}
+
+	public void setUsersLevel(int level) {
+		preferencesEditor.putInt(KEY_USERS_LEVEL, level);
 		preferencesEditor.commit();
 	}
 }

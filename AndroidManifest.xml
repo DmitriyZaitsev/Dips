@@ -23,7 +23,8 @@
 		<activity android:name=".activities.MainActivity"/>
 		<activity
 			android:name=".activities.TimerActivity"
-			android:theme="@android:style/Theme.Dialog"/>
+			android:theme="@android:style/Theme.Dialog"
+			android:label="Time to rest..."/>
 		<activity android:name=".activities.InitialDipsActivity"/>
 	</application>
 </manifest> 

@@ -17,24 +17,24 @@ import java.util.concurrent.TimeUnit;
  * Created by Dmitriy Zaitsev at 2013-04-25, 14:40.<br>
  */
 public class TimerActivity extends Activity {
-	private ImageView ivDigitLeft;
-	private ImageView ivDigitRight;
-	private ExecutorService executorService;
+	private ImageView mDigitLeft;
+	private ImageView mDigitRight;
+	private ExecutorService mExecutorService;
 
 	@Override public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.scr_timer);
 
-		ivDigitLeft = (ImageView) findViewById(R.id.iv_digit_left);
-		ivDigitRight = (ImageView) findViewById(R.id.iv_digit_right);
+		mDigitLeft = (ImageView) findViewById(R.id.iv_digit_left);
+		mDigitRight = (ImageView) findViewById(R.id.iv_digit_right);
 
 		Handler handler = new UiUpdateHandler();
-		executorService = Executors.newSingleThreadExecutor();
-		executorService.execute(new TimerThread(handler));
+		mExecutorService = Executors.newSingleThreadExecutor();
+		mExecutorService.execute(new TimerThread(handler));
 	}
 
 	@Override public void onBackPressed() {
-		executorService.shutdown();
+		mExecutorService.shutdown();
 		setResult(Activity.RESULT_CANCELED);
 		finish();
 	}
@@ -44,10 +44,10 @@ public class TimerActivity extends Activity {
 			int leftDigit = seconds.what / 10;
 
 			if (seconds.what % 10 == 9) {
-				switchDigit(ivDigitLeft, leftDigit);
+				switchDigit(mDigitLeft, leftDigit);
 			}
 			int rightDigit = seconds.what - leftDigit * 10;
-			switchDigit(ivDigitRight, rightDigit);
+			switchDigit(mDigitRight, rightDigit);
 		}
 
 		private void switchDigit(ImageView iv, int digit) {
@@ -90,15 +90,15 @@ public class TimerActivity extends Activity {
 	}
 
 	private class TimerThread implements Runnable {
-		private Handler handler;
+		private Handler mHandler;
 
 		protected TimerThread(Handler handler) {
-			this.handler = handler;
+			this.mHandler = handler;
 		}
 
 		@Override public void run() {
 			for (int seconds = 89; seconds >= 0; seconds--) {
-				handler.sendEmptyMessage(seconds);
+				mHandler.sendEmptyMessage(seconds);
 				try {
 					TimeUnit.SECONDS.sleep(1);
 				} catch (InterruptedException e) {
