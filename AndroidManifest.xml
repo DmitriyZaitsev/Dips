@@ -21,7 +21,9 @@
 		</activity>
 		<activity android:name=".activities.HelloActivity"/>
 		<activity android:name=".activities.MainActivity"/>
-		<activity android:name=".activities.TimerActivity"/>
+		<activity
+			android:name=".activities.TimerActivity"
+			android:theme="@android:style/Theme.Dialog"/>
 		<activity android:name=".activities.InitialDipsActivity"/>
 	</application>
 </manifest> 
