@@ -90,9 +90,9 @@ public class TimerActivity extends Activity {
 	}
 
 	private class TimerThread implements Runnable {
-		private Handler mHandler;
+		private final Handler mHandler;
 
-		protected TimerThread(Handler handler) {
+		TimerThread(Handler handler) {
 			this.mHandler = handler;
 		}
 

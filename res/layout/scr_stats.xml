@@ -7,30 +7,18 @@
 	<TextView
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:text="Неделя: xx,
-		День: хх,
-		Отжиманий: хх"
-		android:id="@+id/tv_header"
+		android:id="@+id/tv_cur_try"
 		/>
 
 	<TextView
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:text="timer"
-		android:id="@+id/tv_timer"
-		/>
-
-	<TextView
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:text="done: xx"
 		android:id="@+id/tv_done"
 		/>
 
 	<TextView
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:text="remaining: xx"
 		android:id="@+id/tv_remaining"
 		/>
 
