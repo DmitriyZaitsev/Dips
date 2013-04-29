@@ -17,4 +17,5 @@
 	<string name="proceed">Proceed</string>
 	<string name="left_digit">Left digit</string>
 	<string name="right_digit">Right digit</string>
+	<string name="zero_digit">0</string>
 </resources>

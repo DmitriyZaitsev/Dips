@@ -1,11 +1,11 @@
-package com.dzaitsev.dips;
+package com.dzaitsev.dips.exercises;
 
 /**
  * ------------------------ DESCRIPTION ------------------------<br>
  * <br>
  * Created by Dmitriy Zaitsev at 2013-04-25, 14:01.<br>
  */
-public final class Sets {
+public final class DipsSet {
 	private static final int[] sSet1 = new int[] {10, 15, 20, 25, 30, 35, 40, 43, 45, 47, 50, 53,
 			55, 60, 63, 65, 68
 	};
@@ -22,23 +22,23 @@ public final class Sets {
 			35, 40, 40, 40
 	};
 
-	public static int[] getSet1() {
+	protected static int[] getSet1() {
 		return sSet1;
 	}
 
-	public static int[] getSet2() {
+	protected static int[] getSet2() {
 		return sSet2;
 	}
 
-	public static int[] getSet3() {
+	protected static int[] getSet3() {
 		return sSet3;
 	}
 
-	public static int[] getSet4() {
+	protected static int[] getSet4() {
 		return sSet4;
 	}
 
-	public static int[] getSet5() {
+	protected static int[] getSet5() {
 		return sSet5;
 	}
 }

@@ -38,7 +38,6 @@ public class TimerActivity extends Activity {
 		final Button mProceed = (Button) findViewById(R.id.btn_proceed);
 
 		mProceed.setOnClickListener(new View.OnClickListener() {
-
 			@Override public void onClick(final View view) {
 				setResultOkAndFinish();
 			}
@@ -55,7 +54,7 @@ public class TimerActivity extends Activity {
 
 	@Override protected void onResume() {
 		super.onResume();
-		mExecutorService.execute(new TimerThread(mHandler));
+		mExecutorService.execute(new TimerThread(mHandler, 90));
 	}
 
 	private void setResultCancelAndFinish() {
@@ -69,7 +68,6 @@ public class TimerActivity extends Activity {
 	}
 
 	private class UiUpdateHandler extends Handler {
-
 		@Override public void handleMessage(final Message message) {
 			if (message.what == Activity.RESULT_OK) {
 				setResultOkAndFinish();

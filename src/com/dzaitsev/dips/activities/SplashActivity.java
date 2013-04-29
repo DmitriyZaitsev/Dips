@@ -16,7 +16,6 @@ import java.util.TimerTask;
  * Created by Dmitriy Zaitsev at 2013-04-25, 16:08.<br>
  */
 public class SplashActivity extends Activity {
-
 	@Override protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.scr_splash);
@@ -27,7 +26,6 @@ public class SplashActivity extends Activity {
 	private void switchScreen() {
 		final Timer timer = new Timer();
 		final TimerTask task = new TimerTask() {
-
 			@Override public void run() {
 				final IDipsPreferences dipsPreferences = new DipsPreferences(SplashActivity.this);
 				final Intent intent;

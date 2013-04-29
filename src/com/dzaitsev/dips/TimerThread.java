@@ -12,14 +12,16 @@ import java.util.concurrent.TimeUnit;
  */
 public class TimerThread implements Runnable {
 	private final Handler mHandler;
+	private final int mSeconds;
 
-	public TimerThread(final Handler handler) {
+	public TimerThread(final Handler handler, final int seconds) {
 		mHandler = handler;
+		mSeconds = seconds;
 	}
 
 	@Override public void run() {
-		for (int seconds = 90; seconds >= 1; seconds--) {
-			mHandler.sendEmptyMessage(seconds);
+		for (int i = mSeconds; i >= 1; i--) {
+			mHandler.sendEmptyMessage(i);
 			try {
 				TimeUnit.SECONDS.sleep(1);
 			} catch (InterruptedException e) {

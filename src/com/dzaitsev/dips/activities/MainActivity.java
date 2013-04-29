@@ -6,11 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import com.dzaitsev.dips.Dips;
 import com.dzaitsev.dips.DipsPreferences;
 import com.dzaitsev.dips.IDipsPreferences;
 import com.dzaitsev.dips.R;
-import com.dzaitsev.dips.Sets;
+import com.dzaitsev.dips.exercises.Dips;
 
 public class MainActivity extends Activity {
 	private final int CODE_REQUEST = 1;
@@ -19,11 +18,11 @@ public class MainActivity extends Activity {
 	private TextView mCurrentSetTextView;
 	private TextView mDoneTextView;
 	private TextView mRemainingTextView;
-	private int mDipsDone;
-	private int mDipsRemaining;
-	private int mTriesFinished;
+	private int mExercisesDone;
+	private int mExercisesRemaining;
+	private int mExercisesFinished;
 	private int mUserLevel;
-
+	
 	@Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == Activity.RESULT_OK) {
 			//TODO: process RESULT_OK
@@ -33,7 +32,6 @@ public class MainActivity extends Activity {
 	}
 
 	/** Called when the activity is first created. */
-
 	@Override protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.scr_stats);
@@ -41,16 +39,15 @@ public class MainActivity extends Activity {
 		initUserProgress();
 
 		final Button bDone = (Button) findViewById(R.id.btn_done);
-		final TextView tvCurrentSet = (TextView) findViewById(R.id.tv_cur_set);
+		final TextView tvCurrentDips = (TextView) findViewById(R.id.tv_cur_exercises);
 		final TextView tvDone = (TextView) findViewById(R.id.tv_done);
 		final TextView tvRemaining = (TextView) findViewById(R.id.tv_remaining);
 
-		tvCurrentSet.setText(String.valueOf(Sets.getSet1()[mUserLevel]));
+		tvCurrentDips.setText(String.valueOf(mDips.getCurrentDips()));
 		tvDone.setText("0");
-		tvRemaining.setText(String.valueOf(mDipsRemaining));
+		tvRemaining.setText(String.valueOf(mExercisesRemaining));
 
 		bDone.setOnClickListener(new View.OnClickListener() {
-
 			@Override public void onClick(final View view) {
 				updateUserProgress();
 				Intent intent = new Intent(MainActivity.this, TimerActivity.class);
@@ -63,7 +60,7 @@ public class MainActivity extends Activity {
 		mUserLevel = mPrefs.getUserLevel();
 		mDips = new Dips(mUserLevel);
 
-		mDipsRemaining = mDips.getSet1() + mDips.getSet2() + mDips.getSet3() + mDips
+		mExercisesRemaining = mDips.getSet1() + mDips.getSet2() + mDips.getSet3() + mDips
 				.getSet4() + mDips.getSet5();
 	}
 

@@ -11,7 +11,7 @@ import android.widget.EditText;
 import com.dzaitsev.dips.DipsPreferences;
 import com.dzaitsev.dips.IDipsPreferences;
 import com.dzaitsev.dips.R;
-import com.dzaitsev.dips.Sets;
+import com.dzaitsev.dips.exercises.DipsSet;
 
 /**
  * ------------------------ DESCRIPTION ------------------------<br>
@@ -20,7 +20,7 @@ import com.dzaitsev.dips.Sets;
  */
 public class InitialDipsActivity extends Activity {
 	private final int DIALOG_TOO_COOL = 1;
-	private final int DIALOG_TOO_FRAIL = 2;
+	@SuppressWarnings("FieldCanBeLocal") private final int DIALOG_TOO_FRAIL = 2;
 	private EditText mInitialDips;
 	private IDipsPreferences mPrefs;
 
@@ -32,7 +32,6 @@ public class InitialDipsActivity extends Activity {
 		final Button bOk = (Button) findViewById(R.id.btn_ok);
 		mInitialDips = (EditText) findViewById(R.id.et_initial_dips);
 		mInitialDips.setOnKeyListener(new View.OnKeyListener() {
-
 			@Override public boolean onKey(final View v, final int keyCode, final KeyEvent event) {
 				if (event.getAction() == KeyEvent.ACTION_DOWN
 						&& keyCode == KeyEvent.KEYCODE_ENTER) {
@@ -44,7 +43,6 @@ public class InitialDipsActivity extends Activity {
 		});
 
 		bOk.setOnClickListener(new View.OnClickListener() {
-
 			@Override public void onClick(final View v) {
 				clickOkButton();
 			}
@@ -68,7 +66,7 @@ public class InitialDipsActivity extends Activity {
 
 	private void setupUser(final int dips) {
 		for (int i = 1; i <= 16; i++) {
-			if (Sets.getSet1()[i - 1] <= dips && dips < Sets.getSet1()[i]) {
+			if (DipsSet.getSet1()[i - 1] <= dips && dips < DipsSet.getSet1()[i]) {
 				mPrefs.setUserLevel(i);
 				mPrefs.setDipsInitial(dips);
 				mPrefs.setAlreadyRegistered(true);
