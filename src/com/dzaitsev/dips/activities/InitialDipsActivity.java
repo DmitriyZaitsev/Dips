@@ -66,6 +66,17 @@ public class InitialDipsActivity extends Activity {
 		}
 	}
 
+	private void setupUser(final int dips) {
+		for (int i = 1; i <= 16; i++) {
+			if (Sets.getSet1()[i - 1] <= dips && dips < Sets.getSet1()[i]) {
+				mPrefs.setUserLevel(i);
+				mPrefs.setDipsInitial(dips);
+				mPrefs.setAlreadyRegistered(true);
+				break;
+			}
+		}
+	}
+
 	private void showAlertDialog(final int id) {
 		final AlertDialog.Builder alertDialog = new AlertDialog.Builder(InitialDipsActivity.this);
 		if (id == DIALOG_TOO_COOL) {
@@ -75,15 +86,5 @@ public class InitialDipsActivity extends Activity {
 		}
 		alertDialog.setCancelable(true);
 		alertDialog.show();
-	}
-
-	private void setupUser(final int dips) {
-		for (int i = 1; i <= 16; i++) {
-			if (Sets.getSet1()[i - 1] <= dips && dips < Sets.getSet1()[i]) {
-				mPrefs.setUserLevel(i);
-				mPrefs.setDipsInitial(dips);
-				mPrefs.setAlreadyRegistered(true);
-			}
-		}
 	}
 }

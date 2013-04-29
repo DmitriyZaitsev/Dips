@@ -6,7 +6,6 @@ package com.dzaitsev.dips;
  * Created by Dmitriy Zaitsev at 2013-04-25, 14:01.<br>
  */
 public final class Sets {
-
 	private static final int[] sSet1 = new int[] {10, 15, 20, 25, 30, 35, 40, 43, 45, 47, 50, 53,
 			55, 60, 63, 65, 68
 	};

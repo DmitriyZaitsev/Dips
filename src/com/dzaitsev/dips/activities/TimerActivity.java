@@ -24,6 +24,11 @@ public class TimerActivity extends Activity {
 	private ImageView mDigitLeft;
 	private ImageView mDigitRight;
 
+	@Override public void onBackPressed() {
+		super.onBackPressed();
+		setResultCancelAndFinish();
+	}
+
 	@Override protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.scr_timer);
@@ -40,24 +45,16 @@ public class TimerActivity extends Activity {
 		});
 
 		mHandler = new UiUpdateHandler();
-	}
-
-	@Override public void onBackPressed() {
-		super.onBackPressed();
-
-		setResultCancelAndFinish();
+		mExecutorService = Executors.newSingleThreadExecutor();
 	}
 
 	@Override protected void onPause() {
 		super.onPause();
-
 		mExecutorService.shutdown();
 	}
 
 	@Override protected void onResume() {
 		super.onResume();
-
-		mExecutorService = Executors.newSingleThreadExecutor();
 		mExecutorService.execute(new TimerThread(mHandler));
 	}
 
@@ -72,6 +69,7 @@ public class TimerActivity extends Activity {
 	}
 
 	private class UiUpdateHandler extends Handler {
+
 		@Override public void handleMessage(final Message message) {
 			if (message.what == Activity.RESULT_OK) {
 				setResultOkAndFinish();

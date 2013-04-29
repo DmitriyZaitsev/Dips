@@ -16,6 +16,7 @@ import java.util.TimerTask;
  * Created by Dmitriy Zaitsev at 2013-04-25, 16:08.<br>
  */
 public class SplashActivity extends Activity {
+
 	@Override protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.scr_splash);

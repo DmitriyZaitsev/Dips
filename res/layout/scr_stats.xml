@@ -1,38 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical"
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent">
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
 
 	<TextView
-		android:layout_width="fill_parent"
+		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:id="@+id/tv_cur_try"
-		/>
+		android:id="@+id/tv_cur_set"
+		android:layout_marginTop="20dp"
+		android:text="90"
+		android:layout_alignParentTop="true"
+		android:layout_alignParentRight="true"
+		android:layout_marginRight="20dp"
+		android:textSize="40sp"/>
 
 	<TextView
-		android:layout_width="fill_parent"
+		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:id="@+id/tv_done"
-		/>
+		android:text="40"
+		android:layout_alignParentTop="true"
+		android:layout_marginTop="80dp"
+		android:layout_alignParentRight="true"
+		android:layout_marginRight="20dp"
+		android:textSize="40sp"/>
 
 	<TextView
-		android:layout_width="fill_parent"
+		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:id="@+id/tv_remaining"
-		/>
+		android:text="50"
+		android:layout_centerVertical="true"
+		android:layout_alignParentTop="true"
+		android:layout_alignParentRight="true"
+		android:layout_marginRight="20dp"
+		android:layout_marginTop="140dp"
+		android:textSize="40sp"/>
 
-	<LinearLayout
-		android:orientation="horizontal"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content">
+	<Button
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/done"
+		android:id="@+id/btn_done"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentLeft="true"/>
 
-		<Button
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="@string/done"
-			android:id="@+id/btn_done"
-			android:layout_weight="50"/>
-	</LinearLayout>
-</LinearLayout>
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/current_dips"
+		android:layout_alignParentLeft="true"
+		android:layout_marginLeft="20dp"
+		android:layout_marginTop="20dp"
+		android:textSize="40sp"/>
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/done"
+		android:layout_alignParentLeft="true"
+		android:layout_marginLeft="20dp"
+		android:layout_marginTop="80dp"
+		android:textSize="40sp"/>
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/remaining"
+		android:layout_alignParentLeft="true"
+		android:layout_marginLeft="20dp"
+		android:layout_marginTop="140dp"
+		android:textSize="40sp"/>
+</RelativeLayout>
 
