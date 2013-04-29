@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import com.dzaitsev.dips.R;
+import com.dzaitsev.dips.TimerThread;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 /**
  * ------------------------ DESCRIPTION ------------------------<br>
@@ -17,40 +19,77 @@ import java.util.concurrent.TimeUnit;
  * Created by Dmitriy Zaitsev at 2013-04-25, 14:40.<br>
  */
 public class TimerActivity extends Activity {
+	private ExecutorService mExecutorService;
+	private Handler mHandler;
 	private ImageView mDigitLeft;
 	private ImageView mDigitRight;
-	private ExecutorService mExecutorService;
 
-	@Override public void onCreate(Bundle savedInstanceState) {
+	@Override protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.scr_timer);
 
 		mDigitLeft = (ImageView) findViewById(R.id.iv_digit_left);
 		mDigitRight = (ImageView) findViewById(R.id.iv_digit_right);
+		final Button mProceed = (Button) findViewById(R.id.btn_proceed);
 
-		Handler handler = new UiUpdateHandler();
-		mExecutorService = Executors.newSingleThreadExecutor();
-		mExecutorService.execute(new TimerThread(handler));
+		mProceed.setOnClickListener(new View.OnClickListener() {
+
+			@Override public void onClick(final View view) {
+				setResultOkAndFinish();
+			}
+		});
+
+		mHandler = new UiUpdateHandler();
 	}
 
 	@Override public void onBackPressed() {
+		super.onBackPressed();
+
+		setResultCancelAndFinish();
+	}
+
+	@Override protected void onPause() {
+		super.onPause();
+
 		mExecutorService.shutdown();
+	}
+
+	@Override protected void onResume() {
+		super.onResume();
+
+		mExecutorService = Executors.newSingleThreadExecutor();
+		mExecutorService.execute(new TimerThread(mHandler));
+	}
+
+	private void setResultCancelAndFinish() {
 		setResult(Activity.RESULT_CANCELED);
 		finish();
 	}
 
-	private class UiUpdateHandler extends Handler {
-		@Override public void handleMessage(Message seconds) {
-			int leftDigit = seconds.what / 10;
+	private void setResultOkAndFinish() {
+		setResult(Activity.RESULT_OK);
+		finish();
+	}
 
-			if (seconds.what % 10 == 9) {
-				switchDigit(mDigitLeft, leftDigit);
+	private class UiUpdateHandler extends Handler {
+		@Override public void handleMessage(final Message message) {
+			if (message.what == Activity.RESULT_OK) {
+				setResultOkAndFinish();
+			} else if (message.what == Activity.RESULT_CANCELED) {
+				setResultCancelAndFinish();
+			} else {
+				int seconds = message.what - 1;
+				int leftDigit = seconds / 10;
+
+				if (seconds % 10 == 9) {
+					switchDigit(mDigitLeft, leftDigit);
+				}
+				int rightDigit = seconds - leftDigit * 10;
+				switchDigit(mDigitRight, rightDigit);
 			}
-			int rightDigit = seconds.what - leftDigit * 10;
-			switchDigit(mDigitRight, rightDigit);
 		}
 
-		private void switchDigit(ImageView iv, int digit) {
+		private void switchDigit(final ImageView iv, final int digit) {
 			switch (digit) {
 				case 0:
 					iv.setBackgroundResource(R.drawable.digit_0);
@@ -86,28 +125,6 @@ public class TimerActivity extends Activity {
 					iv.setBackgroundResource(R.drawable.digit_9);
 					break;
 			}
-		}
-	}
-
-	private class TimerThread implements Runnable {
-		private final Handler mHandler;
-
-		TimerThread(Handler handler) {
-			this.mHandler = handler;
-		}
-
-		@Override public void run() {
-			for (int seconds = 89; seconds >= 0; seconds--) {
-				mHandler.sendEmptyMessage(seconds);
-				try {
-					TimeUnit.SECONDS.sleep(1);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-					onBackPressed();
-				}
-			}
-			setResult(Activity.RESULT_OK);
-			finish();
 		}
 	}
 }

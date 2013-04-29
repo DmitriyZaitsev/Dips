@@ -1,20 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="horizontal"
+	android:orientation="vertical"
 	android:layout_width="match_parent"
-	android:layout_height="240dp">
+	android:layout_height="wrap_content">
 
-	<ImageView
-		android:layout_width="wrap_content"
-		android:layout_height="fill_parent"
-		android:id="@+id/iv_digit_left"
-		android:layout_gravity="center_horizontal|top"
-		android:layout_weight="50"/>
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="255dp">
 
-	<ImageView
-		android:layout_width="wrap_content"
-		android:layout_height="fill_parent"
-		android:id="@+id/iv_digit_right"
-		android:layout_gravity="center_horizontal|top"
-		android:layout_weight="50"/>
+		<ImageView
+			android:background="@drawable/digit_9"
+			android:contentDescription="@string/left_digit"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:id="@+id/iv_digit_left"
+			android:layout_gravity="center_horizontal|top"
+			android:layout_weight="50"/>
+
+		<ImageView
+			android:background="@drawable/digit_0"
+			android:contentDescription="@string/right_digit"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:id="@+id/iv_digit_right"
+			android:layout_gravity="center_horizontal|top"
+			android:layout_weight="50"/>
+	</LinearLayout>
+
+	<Button
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/proceed"
+		android:id="@+id/btn_proceed"
+		android:layout_marginTop="5dp"/>
 </LinearLayout>

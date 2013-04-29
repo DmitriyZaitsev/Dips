@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="app_name">Dips</string>
-	<string name="sorry_pal">Прости, дружище, но ты слишком крут. Иди выебывайся в свой
-		двор!
-	</string>
+	<string name="sorry_pal_too_cool">Прости, дружище, но ты слишком крут. Иди выебывайся в свой
+		двор!</string>
+	<string name="sorry_pal_too_frail">Прости, дружище, но ты слишком хилый. Иди
+		позанимайся еще, а потом приходи!</string>
+	<string name="done">Done</string>
+	<string name="cancel">Cancel</string>
+	<string name="how_much">Сколько раз отжимаешься?</string>
+	<string name="ok">OK</string>
+	<string name="are_you_ready">Hello Warior! Are you ready to rock?!</string>
+	<string name="yes">Yes</string>
+	<string name="no">No</string>
+	<string name="current_set">Current set</string>
+	<string name="remaining">Remaining</string>
+	<string name="proceed">Proceed</string>
+	<string name="left_digit">Left digit</string>
+	<string name="right_digit">Right digit</string>
 </resources>

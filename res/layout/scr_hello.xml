@@ -7,7 +7,7 @@
 	<TextView
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:text="Hello Warior! Are you ready to rock?!"
+		android:text="@string/are_you_ready"
 		android:id="@+id/tv_hello"
 		android:layout_gravity="left|center_vertical"/>
 
@@ -20,7 +20,7 @@
 		<Button
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="Yes!"
+			android:text="@string/yes"
 			android:id="@+id/btn_yes"
 			android:layout_gravity="left|center_vertical"
 			android:layout_weight="50"/>
@@ -28,7 +28,7 @@
 		<Button
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="No!"
+			android:text="@string/no"
 			android:id="@+id/btn_no"
 			android:layout_gravity="left|center_vertical"
 			android:layout_weight="50"/>

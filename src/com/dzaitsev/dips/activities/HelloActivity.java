@@ -13,20 +13,23 @@ import com.dzaitsev.dips.R;
  * Created by Dmitriy Zaitsev at 2013-04-25, 16:35.<br>
  */
 public class HelloActivity extends Activity {
-	@Override public void onCreate(Bundle savedInstanceState) {
+
+	@Override protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.scr_hello);
 
-		Button bYes = (Button) findViewById(R.id.btn_yes);
-		Button bNo = (Button) findViewById(R.id.btn_no);
+		final Button bYes = (Button) findViewById(R.id.btn_yes);
+		final Button bNo = (Button) findViewById(R.id.btn_no);
 
 		bYes.setOnClickListener(new View.OnClickListener() {
+
 			@Override public void onClick(final View v) {
 				startActivity(new Intent(HelloActivity.this, InitialDipsActivity.class));
 				finish();
 			}
 		});
 		bNo.setOnClickListener(new View.OnClickListener() {
+
 			@Override public void onClick(final View v) {
 				finish();
 			}

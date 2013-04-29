@@ -8,53 +8,74 @@ import android.content.SharedPreferences;
  * <br>
  * Created by Dmitriy Zaitsev at 2013-04-25, 16:13.<br>
  */
-public final class DipsPreferences {
-	@SuppressWarnings("FieldCanBeLocal") private final String DIPS_PREFERENCES = "DipsPreferences";
-	private final String KEY_USERNAME = "username";
-	private final String KEY_INITIAL_DIPS = "initial_dips";
-	private final String KEY_ALREADY_REGISTERED = "already_registered";
-	private final String KEY_USERS_LEVEL = "users_level";
-	private final SharedPreferences mSharedPreferences;
+public final class DipsPreferences implements IDipsPreferences {
+
 	private final SharedPreferences.Editor mPreferencesEditor;
+
+	private final SharedPreferences mSharedPreferences;
 
 	public DipsPreferences(Context context) {
 		mSharedPreferences = context.getSharedPreferences(DIPS_PREFERENCES, Context.MODE_PRIVATE);
 		mPreferencesEditor = mSharedPreferences.edit();
 	}
 
-	public String getUsername() {
-		return mSharedPreferences.getString(KEY_USERNAME, "Unknown User");
+	@Override public String getUserName() {
+		return mSharedPreferences.getString(KEY_USER_NAME, "Unknown User");
 	}
 
-	public void setUsername(String name) {
-		mPreferencesEditor.putString(KEY_USERNAME, name);
-		mPreferencesEditor.commit();
-	}
-
-	public int getInitialDips() {
-		return mSharedPreferences.getInt(KEY_INITIAL_DIPS, 0);
-	}
-
-	public void setInitialDips(int amount) {
-		mPreferencesEditor.putInt(KEY_INITIAL_DIPS, amount);
-		mPreferencesEditor.commit();
-	}
-
-	public boolean isAlreadyRegistered() {
+	@Override public boolean isAlreadyRegistered() {
 		return mSharedPreferences.getBoolean(KEY_ALREADY_REGISTERED, false);
 	}
 
-	public void setAlreadyRegistered(boolean registered) {
-		mPreferencesEditor.putBoolean(KEY_ALREADY_REGISTERED, registered);
+	@Override public int getCurrentSet() {
+		return mSharedPreferences.getInt(KEY_CURRENT_SET, 0);
+	}
+
+	@Override public int getDipsDone() {
+		return mSharedPreferences.getInt(KEY_DIPS_DONE, 0);
+	}
+
+	@Override public int getDipsInitial() {
+		return mSharedPreferences.getInt(KEY_DIPS_INITIAL, 0);
+	}
+
+	@Override public int getDipsTotal() {
+		return mSharedPreferences.getInt(KEY_DIPS_TOTAL, 0);
+	}
+
+	@Override public int getUserLevel() {
+		return mSharedPreferences.getInt(KEY_USER_LEVEL, 0);
+	}
+
+	@Override public void setAlreadyRegistered(boolean alreadyRegistered) {
+		mPreferencesEditor.putBoolean(KEY_ALREADY_REGISTERED, alreadyRegistered);
 		mPreferencesEditor.commit();
 	}
 
-	public int getUsersLevel() {
-		return mSharedPreferences.getInt(KEY_USERS_LEVEL, 0);
+	@Override public void setCurrentSet(final int currentSet) {
+		//TODO: Implement DipsPreferences->setCurrentSet body
 	}
 
-	public void setUsersLevel(int level) {
-		mPreferencesEditor.putInt(KEY_USERS_LEVEL, level);
+	@Override public void setDipsDone(final int dipsDone) {
+		//TODO: Implement DipsPreferences->setDipsDone body
+	}
+
+	@Override public void setDipsInitial(int dipsInitial) {
+		mPreferencesEditor.putInt(KEY_DIPS_INITIAL, dipsInitial);
+		mPreferencesEditor.commit();
+	}
+
+	@Override public void setDipsTotal(final int dipsTotal) {
+		//TODO: Implement DipsPreferences->setDipsTotal body
+	}
+
+	@Override public void setUserName(String userName) {
+		mPreferencesEditor.putString(KEY_USER_NAME, userName);
+		mPreferencesEditor.commit();
+	}
+
+	@Override public void setUserLevel(int userLevel) {
+		mPreferencesEditor.putInt(KEY_USER_LEVEL, userLevel);
 		mPreferencesEditor.commit();
 	}
 }
