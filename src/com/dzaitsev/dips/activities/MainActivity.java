@@ -12,23 +12,22 @@ import com.dzaitsev.dips.DipsPreferences;
 import com.dzaitsev.dips.IDipsPreferences;
 import com.dzaitsev.dips.R;
 import com.dzaitsev.dips.exercises.Dips;
+import com.dzaitsev.dips.exercises.Exercise;
 
 public class MainActivity extends Activity {
 	private final int CODE_REQUEST = 1;
 	private Button mDoneButton;
-	private Dips mDips;
+	private Exercise mDips;
 	private IDipsPreferences mPrefs;
-	private TextView mCurrentSetTextView;
-	private TextView mDoneTextView;
+	private TextView mCurrentTextView;
+	private TextView mCompletedTextView;
 	private TextView mRemainingTextView;
-	private int mExercisesDone;
-	private int mExercisesRemaining;
 	private int mUserLevel;
 	
 	@Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == Activity.RESULT_OK) {
 			updateUserProgress();
-			if (mExercisesRemaining <= 0) {
+			if (mDips.getRemaining() <= 0) {
 				mDoneButton.setText(R.string.finish);
 			}
 		} else if (resultCode == Activity.RESULT_CANCELED) {
@@ -44,17 +43,17 @@ public class MainActivity extends Activity {
 		initUserProgress();
 
 		mDoneButton = (Button) findViewById(R.id.btn_done);
-		mCurrentSetTextView = (TextView) findViewById(R.id.tv_cur_exercises);
-		mDoneTextView = (TextView) findViewById(R.id.tv_done);
+		mCurrentTextView = (TextView) findViewById(R.id.tv_cur_exercises);
+		mCompletedTextView = (TextView) findViewById(R.id.tv_done);
 		mRemainingTextView = (TextView) findViewById(R.id.tv_remaining);
 
-		mCurrentSetTextView.setText(String.valueOf(mDips.getCurrentDips()));
-		mDoneTextView.setText("0");
-		mRemainingTextView.setText(String.valueOf(mExercisesRemaining));
+		mCurrentTextView.setText(String.valueOf(mDips.getCurrent()));
+		mCompletedTextView.setText("0");
+		mRemainingTextView.setText(String.valueOf(mDips.getRemaining()));
 
 		mDoneButton.setOnClickListener(new View.OnClickListener() {
 			@Override public void onClick(final View view) {
-				if (mExercisesRemaining <= 0) {
+				if (mDips.getRemaining() <= 0) {
 					showAlertDialog();
 				} else {
 					Intent intent = new Intent(MainActivity.this, TimerActivity.class);
@@ -67,9 +66,6 @@ public class MainActivity extends Activity {
 	private void initUserProgress() {
 		mUserLevel = mPrefs.getUserLevel();
 		mDips = new Dips(mUserLevel);
-
-		mExercisesRemaining = mDips.getSet1() + mDips.getSet2() + mDips.getSet3() + mDips
-				.getSet4() + mDips.getSet5();
 	}
 
 	private void showAlertDialog() {
@@ -86,12 +82,10 @@ public class MainActivity extends Activity {
 
 	private void updateUserProgress() {
 		//TODO: Update user progress
-		mExercisesDone += mDips.getCurrentDips();
-		mExercisesRemaining -= mDips.getCurrentDips();
 		mDips.confirmSet();
 
-		mCurrentSetTextView.setText(String.valueOf(mDips.getCurrentDips()));
-		mDoneTextView.setText(String.valueOf(mExercisesDone));
-		mRemainingTextView.setText(String.valueOf(mExercisesRemaining));
+		mCurrentTextView.setText(String.valueOf(mDips.getCurrent()));
+		mCompletedTextView.setText(String.valueOf(mDips.getCompleted()));
+		mRemainingTextView.setText(String.valueOf(mDips.getRemaining()));
 	}
 }
