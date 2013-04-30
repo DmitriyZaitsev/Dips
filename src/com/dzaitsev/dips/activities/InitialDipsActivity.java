@@ -2,6 +2,7 @@ package com.dzaitsev.dips.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -19,8 +20,8 @@ import com.dzaitsev.dips.exercises.DipsSet;
  * Created by Dmitriy Zaitsev at 2013-04-25, 17:17.<br>
  */
 public class InitialDipsActivity extends Activity {
-	private final int DIALOG_TOO_COOL = 1;
 	@SuppressWarnings("FieldCanBeLocal") private final int DIALOG_TOO_FRAIL = 2;
+	private final int DIALOG_TOO_COOL = 1;
 	private EditText mInitialDips;
 	private IDipsPreferences mPrefs;
 
@@ -65,8 +66,8 @@ public class InitialDipsActivity extends Activity {
 	}
 
 	private void setupUser(final int dips) {
-		for (int i = 1; i <= 16; i++) {
-			if (DipsSet.getSet1()[i - 1] <= dips && dips < DipsSet.getSet1()[i]) {
+		for (int i = 0; i < 16; i++) {
+			if (DipsSet.getSet1()[i] <= dips && dips < DipsSet.getSet1()[i + 1]) {
 				mPrefs.setUserLevel(i);
 				mPrefs.setDipsInitial(dips);
 				mPrefs.setAlreadyRegistered(true);
@@ -83,6 +84,11 @@ public class InitialDipsActivity extends Activity {
 			alertDialog.setMessage(R.string.sorry_pal_too_frail);
 		}
 		alertDialog.setCancelable(true);
+		alertDialog.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+			@Override public void onClick(final DialogInterface dialogInterface, final int i) {
+				finish();
+			}
+		});
 		alertDialog.show();
 	}
 }

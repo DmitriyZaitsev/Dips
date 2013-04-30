@@ -1,6 +1,8 @@
 package com.dzaitsev.dips.activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +15,7 @@ import com.dzaitsev.dips.exercises.Dips;
 
 public class MainActivity extends Activity {
 	private final int CODE_REQUEST = 1;
+	private Button mDoneButton;
 	private Dips mDips;
 	private IDipsPreferences mPrefs;
 	private TextView mCurrentSetTextView;
@@ -20,12 +23,14 @@ public class MainActivity extends Activity {
 	private TextView mRemainingTextView;
 	private int mExercisesDone;
 	private int mExercisesRemaining;
-	private int mExercisesFinished;
 	private int mUserLevel;
 	
 	@Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == Activity.RESULT_OK) {
-			//TODO: process RESULT_OK
+			updateUserProgress();
+			if (mExercisesRemaining <= 0) {
+				mDoneButton.setText(R.string.finish);
+			}
 		} else if (resultCode == Activity.RESULT_CANCELED) {
 			//TODO: process RESULT_CANCEL
 		}
@@ -38,20 +43,23 @@ public class MainActivity extends Activity {
 		mPrefs = new DipsPreferences(MainActivity.this);
 		initUserProgress();
 
-		final Button bDone = (Button) findViewById(R.id.btn_done);
-		final TextView tvCurrentDips = (TextView) findViewById(R.id.tv_cur_exercises);
-		final TextView tvDone = (TextView) findViewById(R.id.tv_done);
-		final TextView tvRemaining = (TextView) findViewById(R.id.tv_remaining);
+		mDoneButton = (Button) findViewById(R.id.btn_done);
+		mCurrentSetTextView = (TextView) findViewById(R.id.tv_cur_exercises);
+		mDoneTextView = (TextView) findViewById(R.id.tv_done);
+		mRemainingTextView = (TextView) findViewById(R.id.tv_remaining);
 
-		tvCurrentDips.setText(String.valueOf(mDips.getCurrentDips()));
-		tvDone.setText("0");
-		tvRemaining.setText(String.valueOf(mExercisesRemaining));
+		mCurrentSetTextView.setText(String.valueOf(mDips.getCurrentDips()));
+		mDoneTextView.setText("0");
+		mRemainingTextView.setText(String.valueOf(mExercisesRemaining));
 
-		bDone.setOnClickListener(new View.OnClickListener() {
+		mDoneButton.setOnClickListener(new View.OnClickListener() {
 			@Override public void onClick(final View view) {
-				updateUserProgress();
-				Intent intent = new Intent(MainActivity.this, TimerActivity.class);
-				startActivityForResult(intent, CODE_REQUEST);
+				if (mExercisesRemaining <= 0) {
+					showAlertDialog();
+				} else {
+					Intent intent = new Intent(MainActivity.this, TimerActivity.class);
+					startActivityForResult(intent, CODE_REQUEST);
+				}
 			}
 		});
 	}
@@ -64,9 +72,26 @@ public class MainActivity extends Activity {
 				.getSet4() + mDips.getSet5();
 	}
 
+	private void showAlertDialog() {
+		final AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+		alertDialog.setMessage(R.string.training_finished);
+		alertDialog.setCancelable(true);
+		alertDialog.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+			@Override public void onClick(final DialogInterface dialogInterface, final int i) {
+				finish();
+			}
+		});
+		alertDialog.show();
+	}
+
 	private void updateUserProgress() {
 		//TODO: Update user progress
+		mExercisesDone += mDips.getCurrentDips();
+		mExercisesRemaining -= mDips.getCurrentDips();
 		mDips.confirmSet();
+
 		mCurrentSetTextView.setText(String.valueOf(mDips.getCurrentDips()));
+		mDoneTextView.setText(String.valueOf(mExercisesDone));
+		mRemainingTextView.setText(String.valueOf(mExercisesRemaining));
 	}
 }

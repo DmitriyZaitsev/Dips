@@ -22,23 +22,23 @@ public final class DipsSet {
 			35, 40, 40, 40
 	};
 
-	protected static int[] getSet1() {
+	public static int[] getSet1() {
 		return sSet1;
 	}
 
-	protected static int[] getSet2() {
+	public static int[] getSet2() {
 		return sSet2;
 	}
 
-	protected static int[] getSet3() {
+	public static int[] getSet3() {
 		return sSet3;
 	}
 
-	protected static int[] getSet4() {
+	public static int[] getSet4() {
 		return sSet4;
 	}
 
-	protected static int[] getSet5() {
+	public static int[] getSet5() {
 		return sSet5;
 	}
 }

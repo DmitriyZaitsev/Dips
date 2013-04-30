@@ -39,6 +39,8 @@ public final class Dips extends Exercise {
 			mCurrentSet = MIN_SET;
 		} else if (mCurrentSet > MAX_SET) {
 			mCurrentSet = MAX_SET;
+			mCurrentExercises = 0;
+			return;
 		}
 
 		if (mCurrentSet == 1) {
