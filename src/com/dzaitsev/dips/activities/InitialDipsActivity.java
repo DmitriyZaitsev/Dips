@@ -12,7 +12,7 @@ import android.widget.EditText;
 import com.dzaitsev.dips.DipsPreferences;
 import com.dzaitsev.dips.IDipsPreferences;
 import com.dzaitsev.dips.R;
-import com.dzaitsev.dips.exercises.DipsSet;
+import com.dzaitsev.dips.exercises.Dips;
 
 /**
  * ------------------------ DESCRIPTION ------------------------<br>
@@ -36,7 +36,7 @@ public class InitialDipsActivity extends Activity {
 			@Override public boolean onKey(final View v, final int keyCode, final KeyEvent event) {
 				if (event.getAction() == KeyEvent.ACTION_DOWN
 						&& keyCode == KeyEvent.KEYCODE_ENTER) {
-					clickOkButton();
+					buttonOkClick();
 					return true;
 				}
 				return false;
@@ -45,20 +45,20 @@ public class InitialDipsActivity extends Activity {
 
 		bOk.setOnClickListener(new View.OnClickListener() {
 			@Override public void onClick(final View v) {
-				clickOkButton();
+				buttonOkClick();
 			}
 		});
 	}
 
-	private void clickOkButton() {
+	private void buttonOkClick() {
 		final String enteredDips = mInitialDips.getText().toString();
-		final int initDips = Integer.valueOf(enteredDips);
+		final int initDips = Integer.parseInt(enteredDips);
 
-		if (0 <= initDips && initDips < 10) {
+		if (Dips.recommend(initDips) < 0) {
 			showAlertDialog(DIALOG_TOO_FRAIL);
-		} else if (initDips >= 65) {
+		} else if (0 < Dips.recommend(initDips)) {
 			showAlertDialog(DIALOG_TOO_COOL);
-		} else if (10 <= initDips && initDips < 65) {
+		} else if (Dips.recommend(initDips) == 0) {
 			setupUser(initDips);
 			startActivity(new Intent(this, MainActivity.class));
 			finish();
@@ -66,14 +66,9 @@ public class InitialDipsActivity extends Activity {
 	}
 
 	private void setupUser(final int dips) {
-		for (int i = 0; i < 16; i++) {
-			if (DipsSet.getSet1()[i] <= dips && dips < DipsSet.getSet1()[i + 1]) {
-				mPrefs.setUserLevel(i + 1);
-				mPrefs.setDipsInitial(dips);
-				mPrefs.setAlreadyRegistered(true);
-				break;
-			}
-		}
+		mPrefs.setUserLevel(Dips.calcLevel(dips));
+		mPrefs.setDipsInitial(dips);
+		mPrefs.setAlreadyRegistered(true);
 	}
 
 	private void showAlertDialog(final int id) {

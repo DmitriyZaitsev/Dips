@@ -22,4 +22,7 @@
 		some rest!</string>
 	<string name="finish">Finish</string>
 	<string name="completed">Completed</string>
+	<string name="msg_very_easy">That was very easy</string>
+	<string name="msg_very_hard">That was very hard</string>
+	<string name="msg_fine">That was fine</string>
 </resources>

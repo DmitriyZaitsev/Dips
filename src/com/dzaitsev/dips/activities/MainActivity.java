@@ -1,8 +1,7 @@
 package com.dzaitsev.dips.activities;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,7 +14,7 @@ import com.dzaitsev.dips.exercises.Dips;
 import com.dzaitsev.dips.exercises.Exercise;
 
 public class MainActivity extends Activity {
-	private final int CODE_REQUEST = 1;
+	private final int ACTIVITY_TIMER = 1;
 	private Button mDoneButton;
 	private Exercise mDips;
 	private IDipsPreferences mPrefs;
@@ -23,18 +22,6 @@ public class MainActivity extends Activity {
 	private TextView mCurrentTextView;
 	private TextView mRemainingTextView;
 	private int mUserLevel;
-	
-	@Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (resultCode == Activity.RESULT_OK) {
-			updateUserProgress();
-
-			if (mDips.getRemaining() <= 0) {
-				mDoneButton.setText(R.string.finish);
-			}
-		} else if (resultCode == Activity.RESULT_CANCELED) {
-			// do nothing
-		}
-	}
 
 	/** Called when the activity is first created. */
 	@Override protected void onCreate(final Bundle savedInstanceState) {
@@ -54,17 +41,29 @@ public class MainActivity extends Activity {
 
 		mDoneButton.setOnClickListener(new View.OnClickListener() {
 			@Override public void onClick(final View view) {
-				doneButtonClick();
+				buttonDoneClick();
 			}
 		});
 	}
 
-	private void doneButtonClick() {
+	@Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == Activity.RESULT_OK) {
+			updateUserProgress();
+
+			if (mDips.getRemaining() <= 0) {
+				mDoneButton.setText(R.string.finish);
+			}
+		} else if (resultCode == Activity.RESULT_CANCELED) {
+			// do nothing
+		}
+	}
+
+	private void buttonDoneClick() {
 		if (mDips.getRemaining() <= 0) {
-			showAlertDialog();
+			showDialog();
 		} else {
 			Intent intent = new Intent(this, TimerActivity.class);
-			startActivityForResult(intent, CODE_REQUEST);
+			startActivityForResult(intent, ACTIVITY_TIMER);
 		}
 	}
 
@@ -73,16 +72,37 @@ public class MainActivity extends Activity {
 		mDips = new Dips(mUserLevel);
 	}
 
-	private void showAlertDialog() {
-		final AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
-		alertDialog.setMessage(R.string.training_finished);
-		alertDialog.setCancelable(true);
-		alertDialog.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-			@Override public void onClick(final DialogInterface dialogInterface, final int i) {
+	private void showDialog() {
+		final Dialog dialog = new Dialog(MainActivity.this);
+		dialog.setCancelable(false);
+		dialog.setContentView(R.layout.dlg_after_training);
+
+		final Button bEasy = (Button) dialog.findViewById(R.id.btn_easy);
+		bEasy.setOnClickListener(new View.OnClickListener() {
+			@Override public void onClick(final View view) {
+				mPrefs.setUserLevel(mPrefs.getUserLevel() + 1);
+				dialog.dismiss();
 				finish();
 			}
 		});
-		alertDialog.show();
+
+		final Button bFine = (Button) dialog.findViewById(R.id.btn_fine);
+		bFine.setOnClickListener(new View.OnClickListener() {
+			@Override public void onClick(final View view) {
+				dialog.dismiss();
+				finish();
+			}
+		});
+
+		final Button bHard = (Button) dialog.findViewById(R.id.btn_hard);
+		bHard.setOnClickListener(new View.OnClickListener() {
+			@Override public void onClick(final View view) {
+				mPrefs.setUserLevel(mPrefs.getUserLevel() - 1);
+				dialog.dismiss();
+				finish();
+			}
+		});
+		dialog.show();
 	}
 
 	private void updateUserProgress() {

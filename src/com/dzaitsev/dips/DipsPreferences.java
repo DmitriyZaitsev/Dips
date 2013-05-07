@@ -80,8 +80,10 @@ public final class DipsPreferences implements IDipsPreferences {
 	}
 
 	@Override public void setUserLevel(final int userLevel) {
-		mPreferencesEditor.putInt(KEY_USER_LEVEL, userLevel);
-		mPreferencesEditor.commit();
+		if (userLevel >= 0) {
+			mPreferencesEditor.putInt(KEY_USER_LEVEL, userLevel);
+			mPreferencesEditor.commit();
+		}
 	}
 
 	@Override public void setUserName(final String userName) {

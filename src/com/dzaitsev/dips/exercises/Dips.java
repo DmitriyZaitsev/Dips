@@ -23,6 +23,33 @@ public final class Dips extends Exercise {
 	}
 
 	/**
+	 * @param initDips your initial dips
+	 *
+	 * @return -1 if you're too frail<br>
+	 *         1 if you're too cool<br>
+	 *         0 if you're OK :)
+	 */
+	public static int recommend(final int initDips) {
+		if (initDips < DipsSet.MIN_DIPS) {
+			return -1;
+		} else if (DipsSet.MIN_DIPS <= initDips && initDips < DipsSet.MAX_DIPS) {
+			return 0;
+		} else {
+			return 1;
+		}
+	}
+
+	/** @return level which depends on dips */
+	public static int calcLevel(final int dips) {
+		for (int i = DipsSet.MIN_LEVEL; i < DipsSet.MAX_LEVEL; i++) {
+			if (DipsSet.getSet1()[i - 1] <= dips && dips < DipsSet.getSet1()[i]) {
+				return i;
+			}
+		}
+		return 0;
+	}
+
+	/**
 	 * @param number number of set
 	 *
 	 * @return amount of exercises of set

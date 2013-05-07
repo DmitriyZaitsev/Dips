@@ -6,8 +6,12 @@ package com.dzaitsev.dips.exercises;
  * Created by Dmitriy Zaitsev at 2013-04-25, 14:01.<br>
  */
 public final class DipsSet {
-	private static final int[] sSet1 = new int[] {10, 15, 20, 25, 30, 35, 40, 43, 45, 47, 50, 53,
-			55, 60, 63, 65, 68
+	static final int MAX_DIPS = 68;
+	static final int MAX_LEVEL = 17;
+	static final int MIN_DIPS = 10;
+	static final int MIN_LEVEL = 1;
+	private static final int[] sSet1 = new int[] {MIN_DIPS, 15, 20, 25, 30, 35, 40, 43, 45, 47, 50,
+			53, 55, 60, 63, 65, MAX_DIPS
 	};
 	private static final int[] sSet2 = new int[] {5, 15, 20, 25, 30, 30, 35, 40, 40, 45, 45, 50, 50,
 			55, 60, 60, 65
