@@ -32,7 +32,8 @@
 			android:layout_marginBottom="10dp"
 			android:layout_marginRight="5dp"
 			android:layout_marginLeft="10dp"
-			android:textColor="@android:color/background_light"/>
+			android:textColor="@android:color/background_light"
+			android:textSize="20sp"/>
 
 		<Button
 			android:layout_width="wrap_content"
@@ -46,6 +47,7 @@
 			android:layout_marginBottom="10dp"
 			android:layout_marginLeft="5dp"
 			android:layout_marginRight="10dp"
-			android:textColor="@android:color/background_light"/>
+			android:textColor="@android:color/background_light"
+			android:textSize="20sp"/>
 	</LinearLayout>
 </LinearLayout>

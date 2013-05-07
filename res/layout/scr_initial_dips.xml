@@ -27,7 +27,8 @@
 		android:layout_alignLeft="@+id/tv_how_much"
 		android:layout_alignRight="@+id/tv_how_much"
 		android:layout_marginTop="5dp"
-		android:layout_marginBottom="5dp"/>
+		android:layout_marginBottom="5dp"
+		android:textSize="20sp"/>
 
 	<Button
 		android:layout_width="wrap_content"
@@ -40,5 +41,6 @@
 		android:layout_alignLeft="@+id/tv_how_much"
 		android:background="@drawable/btn_custom"
 		android:layout_marginTop="5dp"
-		android:textColor="@android:color/background_light"/>
+		android:textColor="@android:color/background_light"
+		android:textSize="20sp"/>
 </RelativeLayout>
