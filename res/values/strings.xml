@@ -21,4 +21,5 @@
 	<string name="training_finished">Training successfully finished. Now you can have
 		some rest!</string>
 	<string name="finish">Finish</string>
+	<string name="completed">Completed</string>
 </resources>

@@ -68,7 +68,7 @@ public class InitialDipsActivity extends Activity {
 	private void setupUser(final int dips) {
 		for (int i = 0; i < 16; i++) {
 			if (DipsSet.getSet1()[i] <= dips && dips < DipsSet.getSet1()[i + 1]) {
-				mPrefs.setUserLevel(i);
+				mPrefs.setUserLevel(i + 1);
 				mPrefs.setDipsInitial(dips);
 				mPrefs.setAlreadyRegistered(true);
 				break;

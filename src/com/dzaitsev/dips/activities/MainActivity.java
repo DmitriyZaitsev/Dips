@@ -19,19 +19,20 @@ public class MainActivity extends Activity {
 	private Button mDoneButton;
 	private Exercise mDips;
 	private IDipsPreferences mPrefs;
-	private TextView mCurrentTextView;
 	private TextView mCompletedTextView;
+	private TextView mCurrentTextView;
 	private TextView mRemainingTextView;
 	private int mUserLevel;
 	
 	@Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == Activity.RESULT_OK) {
 			updateUserProgress();
+
 			if (mDips.getRemaining() <= 0) {
 				mDoneButton.setText(R.string.finish);
 			}
 		} else if (resultCode == Activity.RESULT_CANCELED) {
-			//TODO: process RESULT_CANCEL
+			// do nothing
 		}
 	}
 
@@ -48,19 +49,23 @@ public class MainActivity extends Activity {
 		mRemainingTextView = (TextView) findViewById(R.id.tv_remaining);
 
 		mCurrentTextView.setText(String.valueOf(mDips.getCurrent()));
-		mCompletedTextView.setText("0");
+		mCompletedTextView.setText(String.valueOf(mDips.getCompleted()));
 		mRemainingTextView.setText(String.valueOf(mDips.getRemaining()));
 
 		mDoneButton.setOnClickListener(new View.OnClickListener() {
 			@Override public void onClick(final View view) {
-				if (mDips.getRemaining() <= 0) {
-					showAlertDialog();
-				} else {
-					Intent intent = new Intent(MainActivity.this, TimerActivity.class);
-					startActivityForResult(intent, CODE_REQUEST);
-				}
+				doneButtonClick();
 			}
 		});
+	}
+
+	private void doneButtonClick() {
+		if (mDips.getRemaining() <= 0) {
+			showAlertDialog();
+		} else {
+			Intent intent = new Intent(this, TimerActivity.class);
+			startActivityForResult(intent, CODE_REQUEST);
+		}
 	}
 
 	private void initUserProgress() {
@@ -81,7 +86,6 @@ public class MainActivity extends Activity {
 	}
 
 	private void updateUserProgress() {
-		//TODO: Update user progress
 		mDips.confirmSet();
 
 		mCurrentTextView.setText(String.valueOf(mDips.getCurrent()));

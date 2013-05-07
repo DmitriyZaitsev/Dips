@@ -10,6 +10,7 @@ public final class Dips extends Exercise {
 		super(level);
 		mMaxLevel = 16;
 		mMaxSet = 5;
+
 		if (level <= MIN_LEVEL) {
 			mLevel = MIN_LEVEL;
 		} else if (mMaxLevel < level) {
@@ -17,6 +18,8 @@ public final class Dips extends Exercise {
 		} else {
 			mLevel = level;
 		}
+
+		reset();
 	}
 
 	/**
@@ -26,18 +29,18 @@ public final class Dips extends Exercise {
 	 */
 	public int getSet(final int number) {
 		if (number <= 1) {
-			return DipsSet.getSet1()[mLevel];
+			return DipsSet.getSet1()[mLevel - 1];
 		}
 
 		switch (number) {
 			case 2:
-				return DipsSet.getSet2()[mLevel];
+				return DipsSet.getSet2()[mLevel - 1];
 			case 3:
-				return DipsSet.getSet3()[mLevel];
+				return DipsSet.getSet3()[mLevel - 1];
 			case 4:
-				return DipsSet.getSet4()[mLevel];
+				return DipsSet.getSet4()[mLevel - 1];
 			default:
-				return DipsSet.getSet5()[mLevel];
+				return DipsSet.getSet5()[mLevel - 1];
 		}
 	}
 }
