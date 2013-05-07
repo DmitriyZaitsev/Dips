@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import com.dzaitsev.dips.DipsPreferences;
@@ -75,8 +76,8 @@ public class MainActivity extends Activity {
 	private void showDialog() {
 		final Dialog dialog = new Dialog(MainActivity.this);
 		dialog.setCancelable(false);
+		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		dialog.setContentView(R.layout.dlg_after_training);
-
 		final Button bEasy = (Button) dialog.findViewById(R.id.btn_easy);
 		bEasy.setOnClickListener(new View.OnClickListener() {
 			@Override public void onClick(final View view) {
