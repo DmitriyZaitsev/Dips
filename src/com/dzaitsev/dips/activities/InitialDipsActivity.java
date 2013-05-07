@@ -50,6 +50,12 @@ public class InitialDipsActivity extends Activity {
 		});
 	}
 
+	@Override public void onBackPressed() {
+		super.onBackPressed();
+		startActivity(new Intent(InitialDipsActivity.this, HelloActivity.class));
+		finish();
+	}
+
 	private void buttonOkClick() {
 		final String enteredDips = mInitialDips.getText().toString();
 		final int initDips = Integer.parseInt(enteredDips);
@@ -81,6 +87,7 @@ public class InitialDipsActivity extends Activity {
 		alertDialog.setCancelable(true);
 		alertDialog.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 			@Override public void onClick(final DialogInterface dialogInterface, final int i) {
+				startActivity(new Intent(InitialDipsActivity.this, HelloActivity.class));
 				finish();
 			}
 		});

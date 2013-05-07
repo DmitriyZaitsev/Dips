@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import com.dzaitsev.dips.DipsPreferences;
+import com.dzaitsev.dips.IDipsPreferences;
 import com.dzaitsev.dips.R;
 
 /**
@@ -22,7 +24,15 @@ public class HelloActivity extends Activity {
 
 		bYes.setOnClickListener(new View.OnClickListener() {
 			@Override public void onClick(final View v) {
-				startActivity(new Intent(HelloActivity.this, InitialDipsActivity.class));
+				IDipsPreferences prefs = new DipsPreferences(HelloActivity.this);
+				Intent intent;
+
+				if (prefs.isAlreadyRegistered()) {
+					intent = new Intent(HelloActivity.this, MainActivity.class);
+				} else {
+					intent = new Intent(HelloActivity.this, InitialDipsActivity.class);
+				}
+				startActivity(intent);
 				finish();
 			}
 		});

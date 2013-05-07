@@ -47,6 +47,12 @@ public class MainActivity extends Activity {
 		});
 	}
 
+	@Override public void onBackPressed() {
+		super.onBackPressed();
+		startActivity(new Intent(MainActivity.this, HelloActivity.class));
+		finish();
+	}
+
 	@Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == Activity.RESULT_OK) {
 			updateUserProgress();

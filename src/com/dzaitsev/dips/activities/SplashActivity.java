@@ -3,8 +3,6 @@ package com.dzaitsev.dips.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import com.dzaitsev.dips.DipsPreferences;
-import com.dzaitsev.dips.IDipsPreferences;
 import com.dzaitsev.dips.R;
 
 import java.util.Timer;
@@ -27,19 +25,11 @@ public class SplashActivity extends Activity {
 		final Timer timer = new Timer();
 		final TimerTask task = new TimerTask() {
 			@Override public void run() {
-				final IDipsPreferences dipsPreferences = new DipsPreferences(SplashActivity.this);
-				final Intent intent;
-
-				if (dipsPreferences.isAlreadyRegistered()) {
-					intent = new Intent(SplashActivity.this, MainActivity.class);
-				} else {
-					intent = new Intent(SplashActivity.this, HelloActivity.class);
-				}
-				startActivity(intent);
+				startActivity(new Intent(SplashActivity.this, HelloActivity.class));
 				finish();
 			}
 		};
 
-		timer.schedule(task, 3000);
+		timer.schedule(task, 2000);
 	}
 }
