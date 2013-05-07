@@ -5,7 +5,7 @@ package com.dzaitsev.dips.exercises;
  * <br>
  * Created by Dmitriy Zaitsev at 2013-04-25, 14:01.<br>
  */
-public final class DipsSet {
+final class DipsSet {
 	static final int MAX_DIPS = 68;
 	static final int MAX_LEVEL = 17;
 	static final int MIN_DIPS = 10;

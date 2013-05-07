@@ -8,14 +8,14 @@ package com.dzaitsev.dips.exercises;
 public abstract class Exercise {
 	protected static final int MIN_LEVEL = 1;
 	protected static final int MIN_SET = 1;
-	protected int mCompletedExercises;
-	protected int mCurrentExercises;
-	protected int mCurrentSet;
-	protected int mLevel;
-	protected int mMaxLevel;
-	protected int mMaxSet;
+	private int mCompletedExercises;
+	private int mCurrentExercises;
+	private int mCurrentSet;
+	int mLevel;
+	int mMaxLevel;
+	int mMaxSet;
 
-	public Exercise(final int level) {}
+	Exercise() {}
 
 	/**
 	 * @param number number of set

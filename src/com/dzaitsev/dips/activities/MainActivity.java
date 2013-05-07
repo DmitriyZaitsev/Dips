@@ -15,14 +15,12 @@ import com.dzaitsev.dips.exercises.Dips;
 import com.dzaitsev.dips.exercises.Exercise;
 
 public class MainActivity extends Activity {
-	private final int ACTIVITY_TIMER = 1;
 	private Button mDoneButton;
 	private Exercise mDips;
 	private IDipsPreferences mPrefs;
 	private TextView mCompletedTextView;
 	private TextView mCurrentTextView;
 	private TextView mRemainingTextView;
-	private int mUserLevel;
 
 	/** Called when the activity is first created. */
 	@Override protected void onCreate(final Bundle savedInstanceState) {
@@ -70,12 +68,13 @@ public class MainActivity extends Activity {
 			showDialog();
 		} else {
 			Intent intent = new Intent(this, TimerActivity.class);
+			final int ACTIVITY_TIMER = 1;
 			startActivityForResult(intent, ACTIVITY_TIMER);
 		}
 	}
 
 	private void initUserProgress() {
-		mUserLevel = mPrefs.getUserLevel();
+		final int mUserLevel = mPrefs.getUserLevel();
 		mDips = new Dips(mUserLevel);
 	}
 
