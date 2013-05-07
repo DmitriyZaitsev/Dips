@@ -25,6 +25,12 @@ public class InitialDipsActivity extends Activity {
 	private EditText mInitialDips;
 	private IDipsPreferences mPrefs;
 
+	@Override public void onBackPressed() {
+		super.onBackPressed();
+		startActivity(new Intent(InitialDipsActivity.this, HelloActivity.class));
+		finish();
+	}
+
 	@Override protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.scr_initial_dips);
@@ -48,12 +54,6 @@ public class InitialDipsActivity extends Activity {
 				buttonOkClick();
 			}
 		});
-	}
-
-	@Override public void onBackPressed() {
-		super.onBackPressed();
-		startActivity(new Intent(InitialDipsActivity.this, HelloActivity.class));
-		finish();
 	}
 
 	private void buttonOkClick() {

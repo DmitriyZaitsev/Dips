@@ -8,12 +8,12 @@ package com.dzaitsev.dips.exercises;
 public abstract class Exercise {
 	protected static final int MIN_LEVEL = 1;
 	protected static final int MIN_SET = 1;
-	private int mCompletedExercises;
-	private int mCurrentExercises;
-	private int mCurrentSet;
 	int mLevel;
 	int mMaxLevel;
 	int mMaxSet;
+	private int mCompletedExercises;
+	private int mCurrentExercises;
+	private int mCurrentSet;
 
 	Exercise() {}
 

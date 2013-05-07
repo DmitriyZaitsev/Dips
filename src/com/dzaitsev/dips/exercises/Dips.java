@@ -22,6 +22,16 @@ public final class Dips extends Exercise {
 		reset();
 	}
 
+	/** @return level which depends on dips */
+	public static int calcLevel(final int dips) {
+		for (int i = DipsSet.MIN_LEVEL; i < DipsSet.MAX_LEVEL; i++) {
+			if (DipsSet.getSet1()[i - 1] <= dips && dips < DipsSet.getSet1()[i]) {
+				return i;
+			}
+		}
+		return 0;
+	}
+
 	/**
 	 * @param initDips your initial dips
 	 *
@@ -37,16 +47,6 @@ public final class Dips extends Exercise {
 		} else {
 			return 1;
 		}
-	}
-
-	/** @return level which depends on dips */
-	public static int calcLevel(final int dips) {
-		for (int i = DipsSet.MIN_LEVEL; i < DipsSet.MAX_LEVEL; i++) {
-			if (DipsSet.getSet1()[i - 1] <= dips && dips < DipsSet.getSet1()[i]) {
-				return i;
-			}
-		}
-		return 0;
 	}
 
 	/**

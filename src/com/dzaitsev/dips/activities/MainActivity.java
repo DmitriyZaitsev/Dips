@@ -22,6 +22,24 @@ public class MainActivity extends Activity {
 	private TextView mCurrentTextView;
 	private TextView mRemainingTextView;
 
+	@Override public void onBackPressed() {
+		super.onBackPressed();
+		startActivity(new Intent(MainActivity.this, HelloActivity.class));
+		finish();
+	}
+
+	@Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == Activity.RESULT_OK) {
+			updateUserProgress();
+
+			if (mDips.getRemaining() <= 0) {
+				mDoneButton.setText(R.string.finish);
+			}
+		} else if (resultCode == Activity.RESULT_CANCELED) {
+			// do nothing
+		}
+	}
+
 	/** Called when the activity is first created. */
 	@Override protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -43,24 +61,6 @@ public class MainActivity extends Activity {
 				buttonDoneClick();
 			}
 		});
-	}
-
-	@Override public void onBackPressed() {
-		super.onBackPressed();
-		startActivity(new Intent(MainActivity.this, HelloActivity.class));
-		finish();
-	}
-
-	@Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (resultCode == Activity.RESULT_OK) {
-			updateUserProgress();
-
-			if (mDips.getRemaining() <= 0) {
-				mDoneButton.setText(R.string.finish);
-			}
-		} else if (resultCode == Activity.RESULT_CANCELED) {
-			// do nothing
-		}
 	}
 
 	private void buttonDoneClick() {
