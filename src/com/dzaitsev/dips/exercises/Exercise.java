@@ -15,7 +15,7 @@ public abstract class Exercise {
 	private int mCurrentExercises;
 	private int mCurrentSet;
 
-	Exercise() {}
+	Exercise(final int level) {}
 
 	/**
 	 * @param number number of set

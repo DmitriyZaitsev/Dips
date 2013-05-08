@@ -1,6 +1,7 @@
 package com.dzaitsev.dips.activities;
 
 import android.app.Activity;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -27,6 +28,11 @@ public class TimerActivity extends Activity {
 	@Override public void onBackPressed() {
 		super.onBackPressed();
 		setResultCancelAndFinish();
+	}
+
+	@Override protected void onDestroy() {
+		super.onDestroy();
+		playAlarm();
 	}
 
 	@Override protected void onCreate(final Bundle savedInstanceState) {
@@ -65,6 +71,15 @@ public class TimerActivity extends Activity {
 	private void setResultOkAndFinish() {
 		setResult(Activity.RESULT_OK);
 		finish();
+	}
+
+	private void playAlarm() {
+		new Thread() {
+			public void run() {
+				MediaPlayer mp = MediaPlayer.create(TimerActivity.this, R.raw.alarme);
+				mp.start();
+			}
+		}.start();
 	}
 
 	private class UiUpdateHandler extends Handler {
